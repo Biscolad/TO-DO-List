@@ -4,7 +4,15 @@ import { useState } from 'react'
 
 function App() {
 
-  const [inputText, setInputText] = useState("")
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
+
+  //handle change event
+  function handleChange(event) {
+    const newValue = event.target.value;
+    setInputText(newValue);
+  }
+
  
 
   return (
@@ -14,24 +22,23 @@ function App() {
       </div>
 
       <div>
-        <input type="text" value = {inputText} />
-        <button>
+        <input onChange={handleChange} type="text" value = {inputText} />
+        <button onClick = {addItem} >
           <span>Add</span>
         </button>
 
-        <button>
+        {/* <button>
           <span>Edit</span>
-        </button>
+        </button> */}
 
       </div>
 
       <div>
         <ol>
-          <li>A Item</li>
+          {items.map(todoItem => <li>{todoItem}</li>)}
+  
         </ol>
       </div>
-
-
 
       
     </div>
