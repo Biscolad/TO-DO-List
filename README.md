@@ -1,3 +1,20 @@
+# To-Do List App
+
+A simple to-do list application built with React.
+
+## Overview
+
+This to-do list app is a basic React application that allows users to create, edit, and remove to-do items. It provides a simple and clean interface for managing your tasks.
+
+## Features
+
+- Add new to-do items
+- Edit existing to-do items
+- Mark items as complete
+- Remove items from the list
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
