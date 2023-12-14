@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 
 
 function App() {
@@ -15,10 +15,23 @@ function App() {
 
   //add items to list using spread operators and array
   function addItem() {
-    setItems(prevItems => {
-      return [...prevItems, inputText]
-    }) 
+    setItems(prevItems => [...prevItems, { text: inputText, completed: false }]);
+    
+    //inorder to clear field, set input text to empty string after clicking add button to add items to list
+    setInputText("");
+  } 
+
+  //toggle the completion status of an item that is added
+  function toggleComplete(index) {
+    setItems((prevItems) => {
+      const newItems = [...prevItems];
+      newItems[index] = { ...newItems[index], completed: !newItems[index].completed };
+      return newItems;
+    })
   }
+
+
+  
 
  
 
@@ -42,7 +55,18 @@ function App() {
 
       <div>
         <ol>
-          {items.map(todoItem => <li>{todoItem}</li>)}
+          {items.map((todoItem, index) => ( 
+          <li key={index}>
+            <input 
+
+            //add checkbox to list items
+              type="checkbox"
+              checked={todoItem.completed}
+              onChange={() => toggleComplete(index)} 
+              />
+              {todoItem.text}
+          </li>
+          ))}
   
         </ol>
       </div>
