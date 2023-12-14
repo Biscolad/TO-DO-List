@@ -1,11 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
+import './index.css'
 
 
 function App() {
 
   const [inputText, setInputText] = useState("");
   const [items, setItems] = useState([]);
+
+  //track the index and texts that are edited
+  const [editIndex, setEditIndex] = useState(null)
+  const [editText, setEditText] = useState("");
 
   //handle change event
   function handleChange(event) {
@@ -37,7 +42,8 @@ function App() {
       const newItems = [...prevItems];
       newItems[index] = {...newItems[index], text: newText};
       return newItems; 
-    })
+    });
+    setEditIndex(null);
   }
 
 
@@ -69,28 +75,42 @@ function App() {
       </div>
 
       <div>
-        <ul>
-          {items.map((todoItem, index) => ( 
+        <ol>
+          {[...items].reverse().map((todoItem, index) => ( 
+
 
             //change color of completed items and mark gray
-          <li key={index} style={{textDecoration: todoItem.completed ? 'line-through' : 'none', color: todoItem.completed ? 'gray' : 'black' }}>
-            <input 
+            <li key={index} style={{textDecoration: todoItem.completed ? 'line-through' : 'none', color: todoItem.completed ? 'gray' : 'black' }}>
+              <input 
 
-            //add checkbox to list items
-              type="checkbox"
-              checked={todoItem.completed}
-              onChange={() => toggleComplete(index)} 
-            />
+              //add checkbox to list items
+                type="checkbox"
+                checked={todoItem.completed}
+                onChange={() => toggleComplete(items.length - 1 - index)} 
+              />
+              {editIndex === index ? (
+                <>
+                  <input 
+                    type="text"
+                    value={editText}
+                    onChange={(e) => setEditText(e.target.value)} 
+                  />
+                  <button onClick={() => editItem(index, editText)}>Save</button>
+                </>
+              ) : (
 
-
-            {/* add edit and delete buttons */}
-            <span>{todoItem.text}</span>
-            <button onClick={() => editItem(index, prompt("Edit item:", todoItem.text))}>Edit</button>
-            <button onClick={() => removeItem(index)}>Delete</button>
-          </li>
+                <>
+             
+                  {/* add edit and delete buttons */}
+                  <span>{todoItem.text}</span>
+                  <button onClick={() => {setEditIndex(index); setEditText (todoItem.text); }}>Edit</button>
+                  <button onClick={() => removeItem(index)} disabled={!todoItem.completed}>Delete</button>
+                </>
+              )}
+            </li>
           ))}
   
-        </ul>
+        </ol>
       </div>
 
       
