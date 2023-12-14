@@ -30,6 +30,18 @@ function App() {
     })
   }
 
+
+  //allow editing of an item in a list
+  function editItem(index, newText) {
+    setItems(prevItems => {
+      const newItems = [...prevItems];
+      newItems[index] = {...newItems[index], text: newText};
+      return newItems; 
+    })
+  }
+
+
+
   //to allow an item to be removed from the list
   function removeItem(index) {
     setItems(prevItems => {
@@ -38,6 +50,8 @@ function App() {
       return newItems
     })
   }
+
+
 
 
 
