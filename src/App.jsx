@@ -13,6 +13,13 @@ function App() {
     setInputText(newValue);
   }
 
+  //add items to list using spread operators and array
+  function addItem() {
+    setItems(prevItems => {
+      return [...prevItems, inputText]
+    }) 
+  }
+
  
 
   return (
