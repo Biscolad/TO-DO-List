@@ -54,9 +54,11 @@ function App() {
       </div>
 
       <div>
-        <ol>
+        <ul>
           {items.map((todoItem, index) => ( 
-          <li key={index}>
+
+            //change color of completed items and mark gray
+          <li key={index} style={{textDecoration: todoItem.completed ? 'line-through' : 'none', color: todoItem.completed ? 'gray' : 'black' }}>
             <input 
 
             //add checkbox to list items
@@ -68,7 +70,7 @@ function App() {
           </li>
           ))}
   
-        </ol>
+        </ul>
       </div>
 
       
