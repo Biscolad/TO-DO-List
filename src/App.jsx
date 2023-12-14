@@ -30,10 +30,16 @@ function App() {
     })
   }
 
+  //to allow an item to be removed from the list
+  function removeItem(index) {
+    setItems(prevItems => {
+      const newItems = [...prevItems];
+      newItems.splice(index, 1);
+      return newItems
+    })
+  }
 
-  
 
- 
 
   return (
     <div className = "container">
@@ -46,11 +52,6 @@ function App() {
         <button onClick = {addItem} >
           <span>Add</span>
         </button>
-
-        {/* <button>
-          <span>Edit</span>
-        </button> */}
-
       </div>
 
       <div>
@@ -65,8 +66,13 @@ function App() {
               type="checkbox"
               checked={todoItem.completed}
               onChange={() => toggleComplete(index)} 
-              />
-              {todoItem.text}
+            />
+
+
+            {/* add edit and delete buttons */}
+            <span>{todoItem.text}</span>
+            <button onClick={() => editItem(index, prompt("Edit item:", todoItem.text))}>Edit</button>
+            <button onClick={() => removeItem(index)}>Delete</button>
           </li>
           ))}
   
